@@ -788,6 +788,7 @@ class Requests_IRI
      * @param string $iri
      * @return bool
      * @throws Requests_Exception
+     * @throws Requests_Exception
      */
     private function set_iri($iri)
     {

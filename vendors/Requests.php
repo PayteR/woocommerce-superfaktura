@@ -94,11 +94,12 @@ class Requests {
 		}
 	}
 
-	/**
-	 * Register the built-in autoloader
-	 *
-	 * @codeCoverageIgnore
-	 */
+    /**
+     * Register the built-in autoloader
+     *
+     * @codeCoverageIgnore
+     * @throws Exception
+     */
 	public static function register_autoloader() {
 		spl_autoload_register(['Requests', 'autoloader']);
 	}
@@ -172,6 +173,7 @@ class Requests {
      * @param array $options
      * @return Requests_Response
      * @throws Requests_Exception
+     * @throws Requests_Exception
      */
 	public static function get($url, $headers = [], $options = []) {
 		return self::request($url, $headers, null, self::GET, $options);
@@ -183,6 +185,7 @@ class Requests {
      * @param array $headers
      * @param array $options
      * @return Requests_Response
+     * @throws Requests_Exception
      * @throws Requests_Exception
      */
 	public static function head($url, $headers = [], $options = []) {
@@ -199,6 +202,7 @@ class Requests {
      * @param array $data
      * @param array $options
      * @return Requests_Response
+     * @throws Requests_Exception
      * @throws Requests_Exception
      */
 	public static function post($url, $headers = [], $data = [], $options = []) {

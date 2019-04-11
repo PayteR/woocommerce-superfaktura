@@ -40,6 +40,7 @@ class Requests_IDNAEncoder {
      * @param string $string Hostname
      * @return string Punycode-encoded hostname
      * @throws Requests_Exception
+     * @throws Requests_Exception
      */
 	public static function encode($string) {
 		$parts = explode('.', $string);
