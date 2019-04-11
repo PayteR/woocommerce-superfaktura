@@ -180,16 +180,17 @@ class Requests {
 	}
 	/**#@-*/
 
-	/**
-	 * Send a POST request
-	 *
-	 * @see request()
-	 * @param string $url
-	 * @param array $headers
-	 * @param array $data
-	 * @param array $options
-	 * @return Requests_Response
-	 */
+    /**
+     * Send a POST request
+     *
+     * @see request()
+     * @param string $url
+     * @param array $headers
+     * @param array $data
+     * @param array $options
+     * @return Requests_Response
+     * @throws Requests_Exception
+     */
 	public static function post($url, $headers = [], $data = [], $options = []) {
 		return self::request($url, $headers, $data, self::POST, $options);
 	}

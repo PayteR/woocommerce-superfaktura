@@ -34,12 +34,13 @@ class Requests_IDNAEncoder {
 	const BOOTSTRAP_INITIAL_N    = 128;
 	/**#@-*/
 
-	/**
-	 * Encode a hostname using Punycode
-	 *
-	 * @param string $string Hostname
-	 * @return string Punycode-encoded hostname
-	 */
+    /**
+     * Encode a hostname using Punycode
+     *
+     * @param string $string Hostname
+     * @return string Punycode-encoded hostname
+     * @throws Requests_Exception
+     */
 	public static function encode($string) {
 		$parts = explode('.', $string);
 		foreach ($parts as &$part) {
