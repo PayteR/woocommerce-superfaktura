@@ -1088,13 +1088,17 @@ class WC_SuperFaktura {
 
         $date = current_time('timestamp');
 
-        $invoice_id = strtr( $invoice_id_template, array(
+        $template_tags = array(
             '[YEAR]' => date( 'Y', $date ),
+            '[YEAR_SHORT]' => date( 'y', $date ),
             '[MONTH]' => date( 'm', $date ),
             '[DAY]' => date( 'd', $date ),
             '[COUNT]' => $count,
             '[ORDER_NUMBER]' => $order->get_order_number(),
-        ) );
+        );
+        $invoice_id = strtr( $invoice_id_template, $template_tags );
+
+        $invoice_id = apply_filters('superfaktura_invoice_id', $invoice_id, $template_tags, $key);
 
         update_post_meta($order_id, 'wc_sf_invoice_'.$key.'_id', $invoice_id);
 

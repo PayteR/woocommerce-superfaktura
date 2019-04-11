@@ -78,14 +78,14 @@ class WC_Settings_SuperFaktura extends WC_Settings_Page {
 					),
 					array(
 						'title' => __('Invoice Nr.', 'wc-superfaktura'),
-						'desc' => sprintf(__('Available Tags: %s', 'wc-superfaktura'), '[YEAR], [MONTH], [DAY], [COUNT], [ORDER_NUMBER]'),
+						'desc' => sprintf(__('Available Tags: %s', 'wc-superfaktura'), '[YEAR], [YEAR_SHORT], [MONTH], [DAY], [COUNT], [ORDER_NUMBER]'),
 						'id' => 'woocommerce_sf_invoice_regular_id',
 						'default' => '[YEAR][MONTH][COUNT]',
 						'type' => 'text',
 					),
 					array(
 						'title' => __('Proforma Invoice Nr.', 'wc-superfaktura'),
-						'desc' => sprintf(__('Available Tags: %s', 'wc-superfaktura'), '[YEAR], [MONTH], [DAY], [COUNT], [ORDER_NUMBER]'),
+						'desc' => sprintf(__('Available Tags: %s', 'wc-superfaktura'), '[YEAR], [YEAR_SHORT], [MONTH], [DAY], [COUNT], [ORDER_NUMBER]'),
 						'id' => 'woocommerce_sf_invoice_proforma_id',
 						'default' => 'ZAL[YEAR][MONTH][COUNT]',
 						'type' => 'text',
