@@ -1,0 +1,12 @@
+{
+  "name": "PayteR/woocommerce-superfaktura",
+  "type": "wordpress-plugin",
+  "homepage": "https://github.com/PayteR/woocommerce-superfaktura",
+  "license": "MIT",
+  "description": "Fork from SVN Superfaktura plugin",
+  "keywords": ["plugin","wordpress","superfaktura"],
+  "require": {
+  },
+  "scripts": {
+  }
+}
