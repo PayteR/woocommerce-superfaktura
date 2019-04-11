@@ -52,7 +52,7 @@ class Requests {
 	 *
 	 * @var array
 	 */
-	protected static $transports = array();
+	protected static $transports = [];
 
 	/**
 	 * Selected transport name
@@ -100,7 +100,7 @@ class Requests {
 	 * @codeCoverageIgnore
 	 */
 	public static function register_autoloader() {
-		spl_autoload_register(array('Requests', 'autoloader'));
+		spl_autoload_register(['Requests', 'autoloader']);
 	}
 
 	/**
@@ -110,13 +110,13 @@ class Requests {
 	 */
 	public static function add_transport($transport) {
 		if (empty(self::$transports)) {
-			self::$transports = array(
+			self::$transports = [
 				'Requests_Transport_cURL',
 				'Requests_Transport_fsockopen',
-			);
+            ];
 		}
 
-		self::$transports = array_merge(self::$transports, array($transport));
+		self::$transports = array_merge(self::$transports, [$transport]);
 	}
 
 	/**
@@ -134,10 +134,10 @@ class Requests {
 		// @codeCoverageIgnoreEnd
 
 		if (empty(self::$transports)) {
-			self::$transports = array(
+			self::$transports = [
 				'Requests_Transport_cURL',
 				'Requests_Transport_fsockopen',
-			);
+            ];
 		}
 
 		// Find us a working transport
@@ -145,7 +145,7 @@ class Requests {
 			if (!class_exists($class))
 				continue;
 
-			$result = call_user_func(array($class, 'test'));
+			$result = call_user_func([$class, 'test']);
 			if ($result) {
 				self::$transport = $class;
 				break;
@@ -168,14 +168,14 @@ class Requests {
 	/**
 	 * Send a GET request
 	 */
-	public static function get($url, $headers = array(), $options = array()) {
+	public static function get($url, $headers = [], $options = []) {
 		return self::request($url, $headers, null, self::GET, $options);
 	}
 
 	/**
 	 * Send a HEAD request
 	 */
-	public static function head($url, $headers = array(), $options = array()) {
+	public static function head($url, $headers = [], $options = []) {
 		return self::request($url, $headers, null, self::HEAD, $options);
 	}
 	/**#@-*/
@@ -190,7 +190,7 @@ class Requests {
 	 * @param array $options
 	 * @return Requests_Response
 	 */
-	public static function post($url, $headers = array(), $data = array(), $options = array()) {
+	public static function post($url, $headers = [], $data = [], $options = []) {
 		return self::request($url, $headers, $data, self::POST, $options);
 	}
 
@@ -234,11 +234,11 @@ class Requests {
 	 * @param array $options Options for the request (see description for more information)
 	 * @return Requests_Response
 	 */
-	public static function request($url, $headers = array(), $data = array(), $type = self::GET, $options = array()) {
+	public static function request($url, $headers = [], $data = [], $type = self::GET, $options = []) {
 		if (!preg_match('/^http(s)?:\/\//i', $url)) {
 			throw new Requests_Exception('Only HTTP requests are handled.', 'nonhttp', $url);
 		}
-		$defaults = array(
+		$defaults = [
 			'timeout' => 10,
 			'useragent' => 'php-requests/' . self::VERSION,
 			'redirected' => 0,
@@ -251,7 +251,7 @@ class Requests {
 			'idn' => true,
 			'hooks' => null,
 			'transport' => null,
-		);
+        ];
 		$options = array_merge($defaults, $options);
 
 		if (empty($options['hooks'])) {
@@ -266,7 +266,7 @@ class Requests {
 			$options['auth']->register($options['hooks']);
 		}
 
-		$options['hooks']->dispatch('requests.before_request', array(&$url, &$headers, &$data, &$type, &$options));
+		$options['hooks']->dispatch('requests.before_request', [&$url, &$headers, &$data, &$type, &$options]);
 
 		if ($options['idn'] !== false) {
 			$iri = new Requests_IRI($url);
@@ -286,7 +286,7 @@ class Requests {
 		}
 		$response = $transport->request($url, $headers, $data, $options);
 
-		$options['hooks']->dispatch('requests.before_parse', array(&$response, $url, $headers, $data, $type, $options));
+		$options['hooks']->dispatch('requests.before_parse', [&$response, $url, $headers, $data, $type, $options]);
 
 		return self::parse_response($response, $url, $headers, $data, $options);
 	}
@@ -359,7 +359,7 @@ class Requests {
 			unset($return->headers['connection']);
 		}
 
-		if ((in_array($return->status_code, array(300, 301, 302, 303, 307)) || $return->status_code > 307 && $return->status_code < 400) && $options['follow_redirects'] === true) {
+		if ((in_array($return->status_code, [300, 301, 302, 303, 307]) || $return->status_code > 307 && $return->status_code < 400) && $options['follow_redirects'] === true) {
 			if (isset($return->headers['location']) && $options['redirected'] < $options['redirects']) {
 				$options['redirected']++;
 				$location = $return->headers['location'];
@@ -374,7 +374,7 @@ class Requests {
 
 		$return->redirects = $options['redirected'];
 
-		$options['hooks']->dispatch('requests.after_request', array(&$return, $req_headers, $req_data, $options));
+		$options['hooks']->dispatch('requests.after_request', [&$return, $req_headers, $req_data, $options]);
 		return $return;
 	}
 
@@ -427,7 +427,7 @@ class Requests {
 	 * @return array List of headers
 	 */
 	public static function flattern($array) {
-		$return = array();
+		$return = [];
 		foreach ($array as $key => $value) {
 			$return[] = "$key: $value";
 		}

@@ -16,7 +16,7 @@ class Requests_Response_Headers implements ArrayAccess, IteratorAggregate {
 	 *
 	 * @var array
 	 */
-	protected $data = array();
+	protected $data = [];
 
 	/**
 	 * Check if the given header exists

@@ -23,12 +23,12 @@ class SFAPIclient{
 		$requestOptions;
 
 	public
-		$data = array(
-			'Invoice' => array(),
-			'Expense' => array(),
-			'Client' => array(),
-			'InvoiceItem' => array()
-		);
+		$data = [
+			'Invoice' => [],
+			'Expense' => [],
+			'Client' => [],
+			'InvoiceItem' => []
+    ];
 
 	const
 		API_AUTH_KEYWORD = 'SFAPI',
@@ -38,16 +38,16 @@ class SFAPIclient{
 	public function __construct($email, $apikey, $apptitle = '', $module = 'API', $company_id = ''){
 		Requests::register_autoloader();
 		$this->className  = get_class($this);
-		$this->requestOptions = array(
+		$this->requestOptions = [
 			'timeout' => 30
-		);
+        ];
 
 		$this->email      = $email;
 		$this->apikey     = $apikey;
 		$this->company_id = $company_id;
-		$this->headers    = array(
-			'Authorization' => self::API_AUTH_KEYWORD." " . http_build_query(array('email' => $this->email, 'apikey' => $this->apikey, 'company_id' => $this->company_id))
-		);
+		$this->headers    = [
+			'Authorization' => self::API_AUTH_KEYWORD." " . http_build_query(['email' => $this->email, 'apikey' => $this->apikey, 'company_id' => $this->company_id])
+        ];
 		$this->data['apptitle'] = $apptitle;
 		$this->data['module'] = $module;
 	}
@@ -56,7 +56,7 @@ class SFAPIclient{
 		if(is_array($key)){
 			$this->data[$dataSet] = array_merge($this->data[$dataSet], $key);
 			if (empty($key)) {
-				$this->data[$dataSet] = array();
+				$this->data[$dataSet] = [];
 			}
 		} else {
 			$this->data[$dataSet][$key] = $value;
@@ -86,16 +86,16 @@ class SFAPIclient{
 
 	}
 
-	public function resetData($options = array()) {
+	public function resetData($options = []) {
 		if (empty($options)) {
-			$options = array('Invoice', 'InvoiceItem', 'Expense', 'Client');
+			$options = ['Invoice', 'InvoiceItem', 'Expense', 'Client'];
 		}
 		foreach ($options as $option) {
-			$this->data[$option] = array();
+			$this->data[$option] = [];
 		}
 	}
 
-	public function addItem($item = array()){
+	public function addItem($item = []){
 		$this->data['InvoiceItem'][] = $item;
 	}
 
@@ -129,11 +129,11 @@ class SFAPIclient{
 		}
 	}
 
-	public function addTags($tag_ids = array()){
+	public function addTags($tag_ids = []){
 		$this->data['Tag']['Tag'] = $tag_ids;
 	}
 
-	public function clients($params = array(), $list_info = true){
+	public function clients($params = [], $list_info = true){
 		if(!class_exists('Requests')){
 			trigger_error("Unable to load Requests class", E_USER_WARNING);
 			return false;
@@ -179,7 +179,7 @@ class SFAPIclient{
 		}
 	}
 
-	public function expenses($params = array(), $list_info = true){
+	public function expenses($params = [], $list_info = true){
 		if(!class_exists('Requests')){
 			trigger_error("Unable to load Requests class", E_USER_WARNING);
 			return false;
@@ -254,7 +254,7 @@ class SFAPIclient{
 		}
 	}
 
-	public function invoices($params = array(), $list_info = true){
+	public function invoices($params = [], $list_info = true){
 		if(!class_exists('Requests')){
 			trigger_error("Unable to load Requests class", E_USER_WARNING);
 			return false;
@@ -305,8 +305,8 @@ class SFAPIclient{
 			return false;
 		}
 
-		$data = array();
-		$data['StockLog'] = array();
+		$data = [];
+		$data['StockLog'] = [];
 
 		try{
 			if (!empty($options[0]) && is_array($options[0])) {
@@ -316,7 +316,7 @@ class SFAPIclient{
 			} else {
 				$data['StockLog'][] = $options;
 			}
-			$response = Requests::post($this->getConstant('SFAPI_URL').'/stock_items/addstockmovement', $this->headers, array('data' => json_encode($data)), $this->requestOptions);
+			$response = Requests::post($this->getConstant('SFAPI_URL').'/stock_items/addstockmovement', $this->headers, ['data' => json_encode($data)], $this->requestOptions);
 			$response_data = json_decode($response->body);
 			return $response_data;
 		}
@@ -332,7 +332,7 @@ class SFAPIclient{
 		}
 		try{
 			$data['StockItem'] = $options;
-			$response = Requests::post($this->getConstant('SFAPI_URL').'/stock_items/add', $this->headers, array('data' => json_encode($data)), $this->requestOptions);
+			$response = Requests::post($this->getConstant('SFAPI_URL').'/stock_items/add', $this->headers, ['data' => json_encode($data)], $this->requestOptions);
 			$response_data = json_decode($response->body);
 			return $response_data;
 		}
@@ -348,7 +348,7 @@ class SFAPIclient{
 		}
 		try{
 			$data['StockItem'] = $options;
-			$response = Requests::post($this->getConstant('SFAPI_URL').'/stock_items/edit', $this->headers, array('data' => json_encode($data)), $this->requestOptions);
+			$response = Requests::post($this->getConstant('SFAPI_URL').'/stock_items/edit', $this->headers, ['data' => json_encode($data)], $this->requestOptions);
 			$response_data = json_decode($response->body);
 			return $response_data;
 		}
@@ -357,7 +357,7 @@ class SFAPIclient{
 		}
 	}
 
-	public function stockItems($params = array(), $list_info = true){
+	public function stockItems($params = [], $list_info = true){
 		if(!class_exists('Requests')){
 			trigger_error("Unable to load Requests class", E_USER_WARNING);
 			return false;
@@ -394,13 +394,13 @@ class SFAPIclient{
 		}
 
 		try{
-			$request_data['InvoiceEmail'] = array(
+			$request_data['InvoiceEmail'] = [
 				'invoice_id' => $invoice_id,
 				'email' 	 => $email,
 				'subject' 	 => $subject,
 				'message' 	 => $message,
-			);
-			$response = Requests::post($this->getConstant('SFAPI_URL').'/invoices/mark_as_sent', $this->headers, array('data' => json_encode($request_data)), $this->requestOptions);
+            ];
+			$response = Requests::post($this->getConstant('SFAPI_URL').'/invoices/mark_as_sent', $this->headers, ['data' => json_encode($request_data)], $this->requestOptions);
 			$response_data = json_decode($response->body);
 			return $response_data;
 		}
@@ -417,7 +417,7 @@ class SFAPIclient{
 		try{
 			$request_data['Email'] = $options;
 
-			$response = Requests::post($this->getConstant('SFAPI_URL').'/invoices/send', $this->headers, array('data' => json_encode($request_data)), $this->requestOptions);
+			$response = Requests::post($this->getConstant('SFAPI_URL').'/invoices/send', $this->headers, ['data' => json_encode($request_data)], $this->requestOptions);
 			$response_data = json_decode($response->body);
 			return $response_data;
 		}
@@ -434,7 +434,7 @@ class SFAPIclient{
 		try{
 			$request_data['Post'] = $options;
 
-			$response = Requests::post($this->getConstant('SFAPI_URL').'/invoices/post', $this->headers, array('data' => json_encode($request_data)), $this->requestOptions);
+			$response = Requests::post($this->getConstant('SFAPI_URL').'/invoices/post', $this->headers, ['data' => json_encode($request_data)], $this->requestOptions);
 			$response_data = json_decode($response->body);
 			return $response_data;
 		}
@@ -453,16 +453,16 @@ class SFAPIclient{
 				$date = date('Y-m-d');
 			}
 
-			$request_data['InvoicePayment'] = array(
+			$request_data['InvoicePayment'] = [
 				'invoice_id' => $invoice_id,
 				'payment_type' => $payment_type,
 				'amount' => $amount,
 				'currency' => $currency,
 				'created' => date('Y-m-d', strtotime($date)),
 				'cash_register_id' => $cash_register_id
-			);
+            ];
 
-			$response = Requests::post($this->getConstant('SFAPI_URL').'/invoice_payments/add/ajax:1/api:1', $this->headers, array('data' => json_encode($request_data)), $this->requestOptions);
+			$response = Requests::post($this->getConstant('SFAPI_URL').'/invoice_payments/add/ajax:1/api:1', $this->headers, ['data' => json_encode($request_data)], $this->requestOptions);
 			$response_data = json_decode($response->body);
 			return $response_data;
 		}
@@ -481,7 +481,7 @@ class SFAPIclient{
 			$response = Requests::post(
 				$this->getConstant('SFAPI_URL').'/contact_people/add/api:1',
 				$this->headers,
-				array('data' => json_encode($request_data)),
+				['data' => json_encode($request_data)],
 				$this->requestOptions
 			);
 			return json_decode($response->body);
@@ -501,15 +501,15 @@ class SFAPIclient{
 				$date = date('Y-m-d');
 			}
 
-			$request_data['ExpensePayment'] = array(
+			$request_data['ExpensePayment'] = [
 				'expense_id' => $expense_id,
 				'payment_type' => $payment_type,
 				'amount' => $amount,
 				'currency' => $currency,
 				'created' => date('Y-m-d', strtotime($date)),
-			);
+            ];
 
-			$response = Requests::post($this->getConstant('SFAPI_URL').'/expense_payments/add', $this->headers, array('data' => json_encode($request_data)), $this->requestOptions);
+			$response = Requests::post($this->getConstant('SFAPI_URL').'/expense_payments/add', $this->headers, ['data' => json_encode($request_data)], $this->requestOptions);
 			$response_data = json_decode($response->body);
 			return $response_data;
 		}
@@ -525,9 +525,9 @@ class SFAPIclient{
 		}
 		try{
 			if (empty($this->data['Expense'])) {
-				$response = Requests::post($this->getConstant('SFAPI_URL').'/invoices/create', $this->headers, array('data' => json_encode($this->data)), $this->requestOptions);
+				$response = Requests::post($this->getConstant('SFAPI_URL').'/invoices/create', $this->headers, ['data' => json_encode($this->data)], $this->requestOptions);
 			} else {
-				$response = Requests::post($this->getConstant('SFAPI_URL').'/expenses/add', $this->headers, array('data' => json_encode($this->data)), $this->requestOptions);
+				$response = Requests::post($this->getConstant('SFAPI_URL').'/expenses/add', $this->headers, ['data' => json_encode($this->data)], $this->requestOptions);
 			}
 			$response_data = json_decode($response->body);
 
@@ -545,9 +545,9 @@ class SFAPIclient{
 		}
 		try{
 			if (empty($this->data['Expense'])) {
-				$response = Requests::post($this->getConstant('SFAPI_URL').'/invoices/edit', $this->headers, array('data' => json_encode($this->data)), $this->requestOptions);
+				$response = Requests::post($this->getConstant('SFAPI_URL').'/invoices/edit', $this->headers, ['data' => json_encode($this->data)], $this->requestOptions);
 			} else {
-				$response = Requests::post($this->getConstant('SFAPI_URL').'/expenses/edit', $this->headers, array('data' => json_encode($this->data)), $this->requestOptions);
+				$response = Requests::post($this->getConstant('SFAPI_URL').'/expenses/edit', $this->headers, ['data' => json_encode($this->data)], $this->requestOptions);
 			}
 
 			$response_data = json_decode($response->body);
@@ -564,7 +564,7 @@ class SFAPIclient{
 			return false;
 		}
 		try{
-			$response = Requests::post($this->getConstant('SFAPI_URL').'/clients/create', $this->headers, array('data' => json_encode($this->data)), $this->requestOptions);
+			$response = Requests::post($this->getConstant('SFAPI_URL').'/clients/create', $this->headers, ['data' => json_encode($this->data)], $this->requestOptions);
 			$response_data = json_decode($response->body);
 			return $response_data;
 		}
@@ -578,13 +578,13 @@ class SFAPIclient{
 	}
 
 	public function setInvoice($key, $value = ''){
-		$this->data['Expense'] = array();
+		$this->data['Expense'] = [];
 		return $this->_setData('Invoice', $key, $value);
 	}
 
 	public function setExpense($key, $value = '') {
-		$this->data['Invoice'] = array();
-		$this->data['InvoiceItem'] = array();
+		$this->data['Invoice'] = [];
+		$this->data['InvoiceItem'] = [];
 		return $this->_setData('Expense', $key, $value);
 	}
 
@@ -610,11 +610,11 @@ class SFAPIclient{
 
 	public function register($email, $send_email = true){
 		try{
-			$request_data['User'] = array(
+			$request_data['User'] = [
 				'email' => $email,
 				'send_email' => $send_email
-			);
-			$response = Requests::post($this->getConstant('SFAPI_URL').'/users/create', $this->headers, array('data' => json_encode($request_data)), $this->requestOptions);
+            ];
+			$response = Requests::post($this->getConstant('SFAPI_URL').'/users/create', $this->headers, ['data' => json_encode($request_data)], $this->requestOptions);
 			return json_decode($response->body);
 		}
 		catch (Exception $e) {

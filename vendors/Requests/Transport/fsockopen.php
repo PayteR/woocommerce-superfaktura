@@ -39,7 +39,7 @@ class Requests_Transport_fsockopen implements Requests_Transport {
 	 * @param array $options Request options, see {@see Requests::response()} for documentation
 	 * @return string Raw HTTP result
 	 */
-	public function request($url, $headers = array(), $data = array(), $options = array()) {
+	public function request($url, $headers = [], $data = [], $options = []) {
 		$options['hooks']->dispatch('fsockopen.before_request');
 
 		$url_parts = parse_url($url);
@@ -104,19 +104,19 @@ class Requests_Transport_fsockopen implements Requests_Transport {
 		$headers = Requests::flattern($headers);
 		$out .= implode($headers, "\r\n");
 
-		$options['hooks']->dispatch('fsockopen.after_headers', array(&$out));
+		$options['hooks']->dispatch('fsockopen.after_headers', [&$out]);
 
 		$out .= "\r\nConnection: Close\r\n\r\n" . $request_body;
 
-		$options['hooks']->dispatch('fsockopen.before_send', array(&$out));
+		$options['hooks']->dispatch('fsockopen.before_send', [&$out]);
 
 		fwrite($fp, $out);
-		$options['hooks']->dispatch('fsockopen.after_send', array(&$fake_headers));
+		$options['hooks']->dispatch('fsockopen.after_send', [&$fake_headers]);
 
 		if (!$options['blocking']) {
 			fclose($fp);
 			$fake_headers = '';
-			$options['hooks']->dispatch('fsockopen.after_request', array(&$fake_headers));
+			$options['hooks']->dispatch('fsockopen.after_request', [&$fake_headers]);
 			return '';
 		}
 
@@ -154,7 +154,7 @@ class Requests_Transport_fsockopen implements Requests_Transport {
 		}
 		fclose($fp);
 
-		$options['hooks']->dispatch('fsockopen.after_request', array(&$this->headers));
+		$options['hooks']->dispatch('fsockopen.after_request', [&$this->headers]);
 		return $this->headers;
 	}
 
@@ -164,7 +164,7 @@ class Requests_Transport_fsockopen implements Requests_Transport {
 	 * @return string Accept-Encoding header value
 	 */
 	protected static function accept_encoding() {
-		$type = array();
+		$type = [];
 		if (function_exists('gzinflate')) {
 			$type[] = 'deflate;q=1.0';
 		}

@@ -30,7 +30,7 @@ class Requests_Response {
 	 * Headers, as an associative array
 	 * @var array
 	 */
-	public $headers = array();
+	public $headers = [];
 
 	/**
 	 * Status code, false if non-blocking
@@ -60,5 +60,5 @@ class Requests_Response {
 	 * Previous requests (from redirects)
 	 * @var array Array of Requests_Response objects
 	 */
-	public $history = array();
+	public $history = [];
 }
