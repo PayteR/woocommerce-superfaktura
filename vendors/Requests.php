@@ -165,16 +165,26 @@ class Requests {
 	 * @param array $options
 	 * @return Requests_Response
 	 */
-	/**
-	 * Send a GET request
-	 */
+    /**
+     * Send a GET request
+     * @param $url
+     * @param array $headers
+     * @param array $options
+     * @return Requests_Response
+     * @throws Requests_Exception
+     */
 	public static function get($url, $headers = [], $options = []) {
 		return self::request($url, $headers, null, self::GET, $options);
 	}
 
-	/**
-	 * Send a HEAD request
-	 */
+    /**
+     * Send a HEAD request
+     * @param $url
+     * @param array $headers
+     * @param array $options
+     * @return Requests_Response
+     * @throws Requests_Exception
+     */
 	public static function head($url, $headers = [], $options = []) {
 		return self::request($url, $headers, null, self::HEAD, $options);
 	}

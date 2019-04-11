@@ -795,6 +795,8 @@ class WC_Settings_SuperFaktura extends WC_Settings_Page {
      * :TODO:
      *
      * @since 1.8.0
+     * @param array $array
+     * @return array
      */
     function alter_wc_statuses( $array )
     {

@@ -1111,6 +1111,7 @@ class Requests_IRI
     /**
      * Convert an IRI to a URI (or parts thereof)
      *
+     * @param $string
      * @return string
      */
     private function to_uri($string)
