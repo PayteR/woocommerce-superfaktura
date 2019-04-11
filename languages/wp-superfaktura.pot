@@ -1,0 +1,595 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-04-09 08:57+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: class-wc-superfaktura.php:220
+#, php-format
+msgid ""
+"You use variable %1$s in your invoice nr. or proforma invoice nr., but the "
+"plugin \"%2$s\" is not activated. This may cause that your invoice numbers "
+"will not be sequential."
+msgstr ""
+
+#: class-wc-superfaktura.php:930
+msgid "Buy as Business client"
+msgstr ""
+
+#: class-wc-superfaktura.php:945
+msgid "ID #"
+msgstr ""
+
+#: class-wc-superfaktura.php:955
+msgid "VAT #"
+msgstr ""
+
+#: class-wc-superfaktura.php:965
+msgid "TAX ID #"
+msgstr ""
+
+#: class-wc-superfaktura.php:993
+msgid "Invoices"
+msgstr ""
+
+#: class-wc-superfaktura.php:1002 class-wc-superfaktura.php:1041
+msgid "Proforma"
+msgstr ""
+
+#: class-wc-superfaktura.php:1009 class-wc-superfaktura.php:1050
+#: class-wc-superfaktura.php:1122
+#: includes/class-wc-settings-superfaktura.php:30
+msgid "Invoice"
+msgstr ""
+
+#: class-wc-superfaktura.php:1032
+msgid "View Generated Invoices"
+msgstr ""
+
+#: class-wc-superfaktura.php:1035
+msgid "No invoice was generated"
+msgstr ""
+
+#: class-wc-superfaktura.php:1045
+msgid "Create proforma invoice"
+msgstr ""
+
+#: class-wc-superfaktura.php:1054
+msgid "Create invoice"
+msgstr ""
+
+#: class-wc-superfaktura.php:1061
+msgid "Regenerate existing invoices"
+msgstr ""
+
+#: class-wc-superfaktura.php:1126
+msgid "Proforma invoice"
+msgstr ""
+
+#: class-wc-superfaktura.php:1167
+msgid "Download invoice"
+msgstr ""
+
+#: class-wc-superfaktura.php:1167
+msgid "Download proforma invoice"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:11
+msgid "SuperFaktúra"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:29
+#: includes/class-wc-settings-superfaktura.php:692
+msgid "Authorization"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:31
+#: includes/class-wc-settings-superfaktura.php:351
+msgid "Invoice Creation"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:32
+msgid "Integration"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:33
+msgid "Payment"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:34
+msgid "Shipping"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:56
+msgid "Invoice Options"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:62
+msgid "Invoice Sequence ID"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:68
+msgid "Proforma Invoice Sequence ID"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:74
+msgid "Custom invoice numbering"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:80
+msgid "Invoice Nr."
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:81
+#: includes/class-wc-settings-superfaktura.php:88
+#: includes/class-wc-settings-superfaktura.php:292
+#, php-format
+msgid "Available Tags: %s"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:87
+msgid "Proforma Invoice Nr."
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:94
+msgid "Current Invoice Number"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:105
+msgid "Current Proforma Invoice Number"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:116
+msgid "Number of digits for [COUNT]"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:127
+msgid "Delivery name"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:131
+msgid "Use format <em>CompanyName - FirstName LastName</em>"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:134
+msgid "Invoice language"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:140
+msgid "Default endpoint language"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:141
+msgid "Site locale (fallback to endpoint)"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:142
+msgid "WPML"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:143
+msgid "Slovak"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:144
+msgid "Czech"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:145
+msgid "Εnglish"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:146
+msgid "German"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:147
+msgid "Russian"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:148
+msgid "Ukrainian"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:149
+msgid "Hungarian"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:150
+msgid "Polish"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:158
+msgid "Invoice Comments"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:164
+msgid "Allow custom comments"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:168
+msgid ""
+"Override default comments options in SuperFaktúra. Adds custom comment, "
+"order comment and tax liability if needed."
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:180
+msgid "Comment"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:188
+msgid "Order note"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:192
+msgid "Add order note from customer to comment."
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:196
+msgid "Tax Liability"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:207
+msgid "Additional Invoice Fields"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:213
+msgid "Variable symbol"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:218
+msgid "Use invoice number"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:219
+msgid "Use order number"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:223
+msgid "Add field ID #"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:230
+msgid "Add field VAT #"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:237
+msgid "Add field TAX ID #"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:244
+msgid "Checkout fields required"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:250
+msgid "PAY by square"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:253
+msgid "Display a QR code"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:257
+msgid "Issued by"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:262
+msgid "Issued by Phone"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:267
+msgid "Issued by Web"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:272
+msgid "Issued by Email"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:277
+msgid "Created Date"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:280
+msgid "Use order date instead of current date"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:284
+msgid "Delivery Date"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:287
+msgid "Display a delivery date"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:291
+msgid "Product Description"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:299
+msgid "Discount"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:302
+msgid "Show product discount in description"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:306
+msgid "Coupon"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:309
+msgid "Show coupon code in description"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:313
+msgid "Discount Name"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:320
+msgid "Shipping Item Name"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:327
+msgid "Free Shipping Name"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:330
+msgid ""
+"By default, in case of free shipping, the invoice does not contain shipping "
+"item; to force the item to appear, fill in its name in this field"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:347
+msgid "Don't generate"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:353
+msgid ""
+"Select when you would like to create an invoice for each payment gateway."
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:370
+msgid "Invoice Paid Status (\"Processing\")"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:374
+msgid "Set invoice as paid for order status \"Processing\""
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:378
+msgid "Invoice Paid Status (\"Completed\")"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:382
+msgid "Do not set invoice as paid for order status \"Completed\""
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:386
+msgid "Client Data"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:390
+msgid "Update client data in SuperFaktura"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:394
+msgid "Manual Invoice Creation"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:398
+msgid "Allow manual invoice creation"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:407
+msgid "Proforma Invoice Creation"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:409
+msgid ""
+"Select when you would like to create a proforma invoice for each payment "
+"gateway."
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:426
+msgid "Manual Proforma Invoice Creation"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:430
+msgid "Allow manual proforma invoice creation"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:446
+msgid "Checkout"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:452
+msgid "Billing fields"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:456
+msgid "Add company billing fields to checkout"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:463
+msgid "Order received"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:469
+#: includes/class-wc-settings-superfaktura.php:486
+msgid "Invoice link"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:473
+msgid "Add invoice link to order received screen"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:480
+msgid "Emails"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:490
+msgid "Add invoice link to WooCommerce emails"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:493
+msgid "Invoice PDF attachment"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:497
+msgid "Attach invoice PDF to WooCommerce emails"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:500
+msgid "Cash on delivery orders"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:504
+msgid "Don't add invoice to WooCommerce emails for cash on delivery orders"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:519
+msgid "Payment Methods"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:521
+msgid "Map Woocommerce payment methods to ones in SuperFaktura"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:526
+#: includes/class-wc-settings-superfaktura.php:592
+msgid "Don't use"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:527
+msgid "Transfer"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:528
+msgid "Cash"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:529
+msgid "Paypal"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:530
+msgid "Trustpay"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:531
+msgid "Besteron"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:532
+msgid "Credit card"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:533
+msgid "Debit card"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:534
+msgid "Cash on delivery"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:535
+msgid "Mutual credit"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:536
+msgid "GoPay"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:537
+msgid "Viamo"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:538
+msgid "Postal money order"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:539
+msgid "Other"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:564
+msgid "Cash Registers"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:566
+msgid "Map Woocommerce payment methods to cash registers in SuperFaktura"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:593
+msgid "By mail"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:594
+msgid "By courier"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:595
+msgid "Personal pickup"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:596
+msgid "Freight"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:597
+msgid "Pickup point"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:611
+#: includes/class-wc-settings-superfaktura.php:644
+msgid "Shipping Methods"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:694
+msgid ""
+"You can find your API access credentials in your SuperFaktura account at <a "
+"href=\"https://moja.superfaktura.sk/api_access\">Tools &gt; API</a>"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:698
+msgid "Version"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:706
+msgid "API Email"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:713
+msgid "API Key"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:720
+msgid "Company ID"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:726
+msgid "Logo ID"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:732
+msgid "Bank Account ID"
+msgstr ""
+
+#: includes/class-wc-settings-superfaktura.php:821
+msgid ""
+"Do you have a technical issue with the plugin? Contact us at <a href="
+"\"mailto:superfaktura@2day.sk\">superfaktura@2day.sk</a>"
+msgstr ""
