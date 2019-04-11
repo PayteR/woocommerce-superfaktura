@@ -32,8 +32,8 @@ require_once( plugin_dir_path( __FILE__ ) . 'vendors/SFAPIclient.php' );
 require_once( plugin_dir_path( __FILE__ ) . 'class-wc-superfaktura.php' );
 
 // Register hooks that are fired when the plugin is activated, deactivated, and uninstalled, respectively.
-register_activation_hook( __FILE__, array( 'WC_SuperFaktura', 'activate' ) );
-register_deactivation_hook( __FILE__, array( 'WC_SuperFaktura', 'deactivate' ) );
+register_activation_hook( __FILE__, ['WC_SuperFaktura', 'activate']);
+register_deactivation_hook( __FILE__, ['WC_SuperFaktura', 'deactivate']);
 
 WC_SuperFaktura::get_instance();
 
@@ -41,9 +41,9 @@ WC_SuperFaktura::get_instance();
 function sf_action_links( $links ) {
 
 return array_merge(
-		array(
+		[
 			'settings' => '<a href="'. get_admin_url(null, 'admin.php?page=wc-settings&tab=superfaktura') .'">Settings</a>'
-		),
+        ],
 		$links
 	);
 
