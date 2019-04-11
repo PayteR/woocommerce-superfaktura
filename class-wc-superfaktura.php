@@ -442,7 +442,7 @@ class WC_SuperFaktura {
             'city'                      => $this->get_order_field('billing_city',$order),
             'zip'                       => $this->get_order_field('billing_postcode',$order),
             'phone'                     => $this->get_order_field('billing_phone',$order),
-            'update_addressbook'        => (get_option('woocommerce_sf_invoice_update_addressbook', 'no') == 'yes')
+            'update_addressbook'        => (get_option('woocommerce_sf_invoice_update_addressbook', 'no') == 'yes'),
         ];
 
         if ( $order->get_formatted_billing_address() != $order->get_formatted_shipping_address() )
@@ -544,8 +544,8 @@ class WC_SuperFaktura {
         if ($bank_account_id) {
             $set_invoice_data['bank_accounts'] = [
                 [
-                    'id' => $bank_account_id
-                ]
+                    'id' => $bank_account_id,
+                ],
             ];
         }
 
@@ -587,7 +587,7 @@ class WC_SuperFaktura {
         {
             $api->setInvoice([
                 'already_paid' => true, // bola uz faktura uhradena?
-                'cash_register_id' => get_option('woocommerce_sf_cash_register_'.$this->get_order_field('payment_method',$order))
+                'cash_register_id' => get_option('woocommerce_sf_cash_register_'.$this->get_order_field('payment_method',$order)),
             ]);
         }
 
@@ -596,11 +596,18 @@ class WC_SuperFaktura {
         //pridanie polozky na fakturu, metoda moze byt volana viackrat
         //v pripade ze nie ste platca dph, uvadzajte polozku tax = 0
 
+        /**
+         * @var $items WC_Order_Item_Product[]
+         */
         $items = $order->get_items();
 
         foreach ( $items as $item_id => $item )
         {
-            $product = $order->get_product_from_item($item);
+            // Povodne tu bolo $product = $order->get_product_from_item($item);
+            // ktore je uz ale deprecated. Miesto toho tu je $item->get_product();
+            // metoda, ktora sa vola na WC_Order_Item_Product(). Z $order->get_items()
+            // Vraj mame dostat iba WC_Order_Item(), ale to nie je pravda v tomto pripade
+            $product = $item->get_product();
 
             $processed_item_meta = $item['item_meta'];
 
@@ -727,14 +734,15 @@ class WC_SuperFaktura {
                 foreach( $coupons_codes as $coupon_code ) {
                     $coupon = new WC_Coupon( $coupon_code );
 
+                    $sign = '';
                     if ( $coupon->is_type( 'fixed_cart' ) ) {
-                        $sign = $order->get_order_currency();
+                        $sign = $order->get_currency();
                     } elseif ( $coupon->is_type( 'percent' ) ) {
                         $sign = '%';
                     }
 
                     if ( 'yes' == get_option( 'woocommerce_sf_product_description_show_coupon_code', 'yes' ) ) {
-                        $coupons[] = $coupon_code . ' (' . $coupon->coupon_amount . ' ' . $sign . ')';
+                        $coupons[] = $coupon_code . ' (' . $coupon->get_amount() . ' ' . $sign . ')';
                     }
                     else {
                         $coupons[] = $coupon->coupon_amount . ' ' . $sign;
@@ -954,7 +962,7 @@ class WC_SuperFaktura {
                 $new_fields['wi_as_company'] = [
                     'type' => 'checkbox',
                     'label' => __('Buy as Business client', 'wc-superfaktura'),
-                    'class' => ['form-row-wide']
+                    'class' => ['form-row-wide'],
                 ];
             }
 
@@ -970,7 +978,7 @@ class WC_SuperFaktura {
                         'type' => 'text',
                         'label' => __('ID #', 'wc-superfaktura'),
                         'required' => $required,
-                        'class' => ['form-row-wide']
+                        'class' => ['form-row-wide'],
                     ];
                 }
 
@@ -980,7 +988,7 @@ class WC_SuperFaktura {
                         'type' => 'text',
                         'label' => __('VAT #', 'wc-superfaktura'),
                         'required' => $required,
-                        'class' => ['form-row-wide']
+                        'class' => ['form-row-wide'],
                     ];
                 }
 
@@ -990,7 +998,7 @@ class WC_SuperFaktura {
                         'type' => 'text',
                         'label' => __('TAX ID #', 'wc-superfaktura'),
                         'required' => $required,
-                        'class' => ['form-row-wide']
+                        'class' => ['form-row-wide'],
                     ];
                 }
             }
@@ -1197,7 +1205,7 @@ class WC_SuperFaktura {
             return [
                 'type' => 'regular',
                 'pdf' => $pdf,
-                'invoice_id' => (int) get_post_meta( $order_id, 'wc_sf_internal_regular_id', true )
+                'invoice_id' => (int) get_post_meta( $order_id, 'wc_sf_internal_regular_id', true ),
             ];
         }
 
@@ -1205,7 +1213,7 @@ class WC_SuperFaktura {
             return [
                 'type' => 'proforma',
                 'pdf' => $pdf,
-                'invoice_id' => (int) get_post_meta( $order_id, 'wc_sf_internal_proforma_id', true )
+                'invoice_id' => (int) get_post_meta( $order_id, 'wc_sf_internal_proforma_id', true ),
             ];
         }
 
