@@ -275,6 +275,9 @@ class WC_SuperFaktura {
         // TODO: Define your action hook callback here
     }
 
+    /**
+     * @return SFAPIclient|SFAPIclientAT|SFAPIclientCZ
+     */
     public function sf_api()
     {
         $sf_email = get_option('woocommerce_sf_email');
@@ -295,6 +298,10 @@ class WC_SuperFaktura {
         }
     }
 
+    /**
+     * @param int $invoice_id
+     * @param SFAPIclient|SFAPIclientAT|SFAPIclientCZ $api
+     */
     public function sf_clean_invoice_items($invoice_id, $api)
     {
         $response = $api->invoice($invoice_id);
@@ -308,6 +315,9 @@ class WC_SuperFaktura {
         }
     }
 
+    /**
+     * @param int $order_id
+     */
     public function sf_new_invoice($order_id)
     {
         $order = new WC_Order($order_id);
@@ -324,6 +334,9 @@ class WC_SuperFaktura {
         }
     }
 
+    /**
+     * @param int $order_id
+     */
     public function sf_regen_invoice($order_id)
     {
         $order = new WC_Order($order_id);
@@ -337,6 +350,10 @@ class WC_SuperFaktura {
         }
     }
 
+    /**
+     * @param WC_Order $order
+     * @param string $type
+     */
     private function sf_generate_invoice( $order, $type ) {
         $edit = false;
         $api = $this->sf_api();
@@ -623,8 +640,8 @@ class WC_SuperFaktura {
 
             $attributes = $item_meta->meta ? $item_meta->display( true, true, '_', ', ' ) : '';
             $non_variations_attributes = $this->get_non_variations_attributes($item['product_id']);
-            $variation = $product instanceof WC_Product_Variation ? $this->convert_to_plaintext( $product->get_variation_description() ) : '';
-            $short_descr = $this->convert_to_plaintext( $product->get_post_data()->post_excerpt );
+            $variation = $product instanceof WC_Product_Variation ? $this->convert_to_plaintext( $product->get_description() ) : '';
+            $short_descr = $this->convert_to_plaintext( get_post( $product )->post_excerpt );
             $template = get_option( 'woocommerce_sf_product_description', $this->product_description_template_default );
 
             $item_data['description'] = strtr( $template, array(
@@ -636,11 +653,11 @@ class WC_SuperFaktura {
             ) );
 
             //Fix for WooCommerce Wholesale Pricing plugin
-            $wprice = get_post_meta( $product->id, 'wholesale_price', true );
+            $wprice = get_post_meta( $product->get_id(), 'wholesale_price', true );
 
             if ( ! $wprice && $product->is_on_sale() )
             {
-                $tax = 1 + (($product->get_price_excluding_tax() == 0) ? 0 : round( (( $product->get_price_including_tax() - $product->get_price_excluding_tax() ) / $product->get_price_excluding_tax()), 2 ));
+                $tax = 1 + ((wc_get_price_excluding_tax($product) == 0) ? 0 : round( (( wc_get_price_including_tax($product) - wc_get_price_excluding_tax($product) ) / wc_get_price_excluding_tax($product)), 2 ));
                 // $item_data['unit_price'] = ($tax)? $product->get_regular_price() / $tax : $product->get_regular_price();
 
                 //$zlava = round( ( $product->get_regular_price() - $product->get_sale_price() ) / $product->get_regular_price() * 100 );
@@ -813,7 +830,12 @@ class WC_SuperFaktura {
     }
 
 
-
+    /**
+     * @param int $order_id
+     * @param $woocommerce_sf_invoice_language
+     * @param bool $strict
+     * @return mixed|string
+     */
     function get_language( $order_id, $woocommerce_sf_invoice_language, $strict = false )
     {
         $locale_map = array(
@@ -859,11 +881,12 @@ class WC_SuperFaktura {
     }
 
 
-
     /**
      * Get non-variation product attributes
      *
-     * @since    1.6.17
+     * @since 1.6.17
+     * @param int $product_id
+     * @return false|string
      */
     function get_non_variations_attributes($product_id)
     {
@@ -886,7 +909,8 @@ class WC_SuperFaktura {
     /**
      * Save our meta data to an order.
      *
-     * @since    1.0.0
+     * @since 1.0.0
+     * @param int $order_id
      */
     function checkout_order_meta($order_id)
     {
@@ -911,7 +935,9 @@ class WC_SuperFaktura {
     /**
      * Add company information fields on checkout page.
      *
-     * @since    1.0.0
+     * @since 1.0.0
+     * @param $fields
+     * @return array
      */
     function billing_fields($fields)
     {
@@ -974,11 +1000,12 @@ class WC_SuperFaktura {
     }
 
 
-
     /**
      * Create tab in WooCommerce settings for this plugin.
      *
      * @since 1.8.0
+     * @param array $settings
+     * @return array
      */
     public function woocommerce_settings( $settings ) {
         require_once plugin_dir_path( __FILE__ ) . 'includes/class-wc-settings-superfaktura.php';
@@ -993,6 +1020,11 @@ class WC_SuperFaktura {
         add_meta_box('wc_sf_invoice_box', __('Invoices', 'wc-superfaktura'), array($this, 'add_box'), 'shop_order', 'side');
     }
 
+    /**
+     * @param array $actions
+     * @param WC_Order $order
+     * @return array
+     */
     function my_orders_actions( $actions, $order )
     {
         $pdf = get_post_meta( $this->get_order_field('id',$order), 'wc_sf_invoice_proforma', true );
@@ -1013,6 +1045,10 @@ class WC_SuperFaktura {
         return $actions;
     }
 
+    /**
+     * @param WC_Order $order
+     * @return bool
+     */
     function sf_can_regenerate($order)
     {
         if($this->get_order_field('status',$order)=='completed')
@@ -1024,6 +1060,9 @@ class WC_SuperFaktura {
         return true;
     }
 
+    /**
+     * @param WP_Post $post
+     */
     function add_box($post)
     {
         $invoice = get_post_meta($post->ID, 'wc_sf_invoice_regular', true);
@@ -1066,6 +1105,11 @@ class WC_SuperFaktura {
             //echo '<p><a href="'.admin_url('post.php?post='.$_GET['post'].'&action=edit&wc_sf_invoice_resend').'" class="button">'.__('Resend Invoices', 'wc-superfaktura').'</a></p>';
     }
 
+    /**
+     * @param WC_Order $order
+     * @param string $key
+     * @return mixed|string|void
+     */
     function generate_invoice_id( $order, $key = 'regular' )
     {
         $order_id = $this->get_order_field('id',$order);
@@ -1105,6 +1149,11 @@ class WC_SuperFaktura {
         return $invoice_id;
     }
 
+    /**
+     * @param string $payment_method
+     * @param string $type
+     * @return string
+     */
     function generate_invoice_status($payment_method, $type = 'regular')
     {
         if($type!='regular' && $type!='proforma')
@@ -1118,6 +1167,9 @@ class WC_SuperFaktura {
         return $generate;
     }
 
+    /**
+     * @param int $order_id
+     */
     function sf_invoice_link_page( $order_id )
     {
         if ( get_option('woocommerce_sf_order_received_invoice_link', 'yes') == 'yes' ) {
@@ -1135,7 +1187,10 @@ class WC_SuperFaktura {
     }
 
 
-
+    /**
+     * @param int $order_id
+     * @return array|bool
+     */
     function get_invoice_data( $order_id )
     {
         if ( $pdf = get_post_meta( $order_id, 'wc_sf_invoice_regular', true ) ) {
@@ -1157,8 +1212,10 @@ class WC_SuperFaktura {
         return false;
     }
 
-
-
+    /**
+     * @param WC_Order $order
+     * @param bool $sent_to_admin
+     */
     function sf_invoice_link_email( $order, $sent_to_admin = false )
     {
 
@@ -1181,11 +1238,15 @@ class WC_SuperFaktura {
         }
     }
 
-
-
+    /**
+     * @param string[] $attachments
+     * @param $status
+     * @param WC_Order $order
+     * @return string[]
+     */
     function sf_invoice_attachment_email ( $attachments , $status, $order )
     {
-        if ( 'WC_Order' != get_class($order)) {
+         if ( 'WC_Order' != get_class($order)) {
             return $attachments;
         }
 
@@ -1213,7 +1274,9 @@ class WC_SuperFaktura {
     }
 
 
-
+    /**
+     * @return array
+     */
     function get_order_statuses()
     {
         if ( function_exists( 'wc_order_status_manager_get_order_status_posts' ) ) // plugin WooCommerce Order Status Manager
@@ -1252,6 +1315,10 @@ class WC_SuperFaktura {
         return $shop_order_statuses;
     }
 
+    /**
+     * @param array $array
+     * @return array
+     */
     function alter_wc_statuses( $array )
     {
         $new_array = array();
@@ -1263,6 +1330,11 @@ class WC_SuperFaktura {
         return $new_array;
     }
 
+    /**
+     * @param string $id
+     * @param WC_Order $order
+     * @return mixed
+     */
     function get_order_field( $id, $order ) {
         if ( $this->version_check() ) {
             $fn = "get_{$id}";
@@ -1272,6 +1344,10 @@ class WC_SuperFaktura {
         }
     }
 
+    /**
+     * @param WC_Order $order
+     * @return mixed
+     */
     function get_shipping_total( $order ) {
         if ( $this->version_check() ) {
             return $order->get_shipping_total();
@@ -1280,6 +1356,10 @@ class WC_SuperFaktura {
         }
     }
 
+    /**
+     * @param string $version
+     * @return bool
+     */
     function version_check( $version = '3.2' ) {
         if ( version_compare( WC()->version, $version, ">=" ) ) {
             return true;
@@ -1288,6 +1368,10 @@ class WC_SuperFaktura {
         return false;
     }
 
+    /**
+     * @param WC_Order $order
+     * @return bool
+     */
     function order_is_paid( $order ) {
 
         switch ($this->get_order_field( 'status', $order )) {
@@ -1312,6 +1396,10 @@ class WC_SuperFaktura {
         return apply_filters( 'woocommerce_sf_order_is_paid', $is_paid, $order );
     }
 
+    /**
+     * @param string $string
+     * @return string
+     */
     function convert_to_plaintext( $string )
     {
         return html_entity_decode( wp_strip_all_tags( $string ), ENT_QUOTES, get_option( 'blog_charset' ) );
