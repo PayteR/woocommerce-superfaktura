@@ -158,11 +158,11 @@ class Requests_IPv6
             $pos = strrpos($ip, ':');
             $ipv6_part = substr($ip, 0, $pos);
             $ipv4_part = substr($ip, $pos + 1);
-            return [$ipv6_part, $ipv4_part];
+            return array($ipv6_part, $ipv4_part);
         }
         else
         {
-            return [$ip, ''];
+            return array($ip, '');
         }
     }
 

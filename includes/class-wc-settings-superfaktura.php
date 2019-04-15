@@ -45,7 +45,8 @@ class WC_Settings_SuperFaktura extends WC_Settings_Page {
 	 * @return array Array of settings
 	 */
 	public function get_settings( $current_section = '' ) {
-		$gateways = WC()->payment_gateways();
+		$wc_gateways = WC()->payment_gateways();
+		$gateways = $wc_gateways->payment_gateways;
 
 		$settings = [];
 		switch ( $current_section ) {

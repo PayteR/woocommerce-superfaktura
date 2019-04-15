@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: superfaktura, invoice, faktura, proforma, woocommerce
 Requires at least: 4.4
 Tested up to: 5.1
-Stable tag: 1.8.12
+Stable tag: 1.8.15
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -62,6 +62,15 @@ This usually happens when you change your login email address. The email address
 You can read more about SuperFaktura API integration at [superfaktura.sk/api](http://www.superfaktura.sk/api/)
 
 == Changelog ==
+
+= 1.8.15 =
+* Opravená chyba v nastaveniach vystavenia faktúry
+
+= 1.8.14 =
+* Opravený chýbajúci popis produktu v položke faktúry
+
+= 1.8.13 =
+* Nahradené volania deprecated funkcií, doplnená značka [YEAR_SHORT] v číslovaní faktúr
 
 = 1.8.12 =
 * Doplnená možnosť nastaviť adresu webu v pätičke faktúry

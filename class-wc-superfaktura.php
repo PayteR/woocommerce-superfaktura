@@ -23,7 +23,7 @@ class WC_SuperFaktura {
      *
      * @var     string
      */
-    protected $version = '1.8.12';
+    protected $version = '1.8.15';
 
     /**
      * Unique identifier for your plugin.
@@ -648,7 +648,7 @@ class WC_SuperFaktura {
             $attributes = $item_meta->meta ? $item_meta->display( true, true, '_', ', ' ) : '';
             $non_variations_attributes = $this->get_non_variations_attributes($item['product_id']);
             $variation = $product instanceof WC_Product_Variation ? $this->convert_to_plaintext( $product->get_description() ) : '';
-            $short_descr = $this->convert_to_plaintext( get_post( $product )->post_excerpt );
+            $short_descr = $this->convert_to_plaintext( $product->get_short_description() );
             $template = get_option( 'woocommerce_sf_product_description', $this->product_description_template_default );
 
             $item_data['description'] = strtr( $template, [

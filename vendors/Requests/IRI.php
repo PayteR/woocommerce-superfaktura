@@ -103,25 +103,25 @@ class Requests_IRI
      * Each key is the scheme, each value is an array with each key as the IRI
      * part and value as the default value for that part.
      */
-    private $normalization = [
-        'acap' => [
+    private $normalization = array(
+        'acap' => array(
             'port' => 674
-        ],
-        'dict' => [
+        ),
+        'dict' => array(
             'port' => 2628
-        ],
-        'file' => [
+        ),
+        'file' => array(
             'ihost' => 'localhost'
-        ],
-        'http' => [
+        ),
+        'http' => array(
             'port' => 80,
             'ipath' => '/'
-        ],
-        'https' => [
+        ),
+        'https' => array(
             'port' => 443,
             'ipath' => '/'
-        ],
-    ];
+        ),
+    );
 
     /**
      * Return the entire IRI when you try and read the object as a string
@@ -143,7 +143,7 @@ class Requests_IRI
     {
         if (method_exists($this, 'set_' . $name))
         {
-            call_user_func([$this, 'set_' . $name], $value);
+            call_user_func(array($this, 'set_' . $name), $value);
         }
         elseif (
                $name === 'iauthority'
@@ -154,7 +154,7 @@ class Requests_IRI
             || $name === 'ifragment'
         )
         {
-            call_user_func([$this, 'set_' . substr($name, 1)], $value);
+            call_user_func(array($this, 'set_' . substr($name, 1)), $value);
         }
     }
 
@@ -236,7 +236,7 @@ class Requests_IRI
     {
         if (method_exists($this, 'set_' . $name))
         {
-            call_user_func([$this, 'set_' . $name], '');
+            call_user_func(array($this, 'set_' . $name), '');
         }
     }
 
@@ -458,7 +458,7 @@ class Requests_IRI
     private function replace_invalid_with_pct_encoding($string, $extra_chars, $iprivate = false)
     {
         // Normalize as many pct-encoded sections as possible
-        $string = preg_replace_callback('/(?:%[A-Fa-f0-9]{2})+/', [&$this, 'remove_iunreserved_percent_encoded'], $string);
+        $string = preg_replace_callback('/(?:%[A-Fa-f0-9]{2})+/', array(&$this, 'remove_iunreserved_percent_encoded'), $string);
 
         // Replace invalid percent characters
         $string = preg_replace('/%(?![A-Fa-f0-9]{2})/', '%25', $string);
@@ -787,15 +787,13 @@ class Requests_IRI
      *
      * @param string $iri
      * @return bool
-     * @throws Requests_Exception
-     * @throws Requests_Exception
      */
     private function set_iri($iri)
     {
         static $cache;
         if (!$cache)
         {
-            $cache = [];
+            $cache = array();
         }
 
         if ($iri === null)
@@ -824,16 +822,14 @@ class Requests_IRI
                 && $this->set_query($parsed['query'])
                 && $this->set_fragment($parsed['fragment']);
 
-            $cache[$iri] = [
-                $this->scheme,
+            $cache[$iri] = array($this->scheme,
                                  $this->iuserinfo,
                                  $this->ihost,
                                  $this->port,
                                  $this->ipath,
                                  $this->iquery,
                                  $this->ifragment,
-                                 $return
-            ];
+                                 $return);
             return $return;
         }
     }
@@ -874,7 +870,7 @@ class Requests_IRI
     {
         static $cache;
         if (!$cache)
-            $cache = [];
+            $cache = array();
 
         if ($authority === null)
         {
@@ -921,12 +917,10 @@ class Requests_IRI
                       $this->set_host($remaining) &&
                       $this->set_port($port);
 
-            $cache[$authority] = [
-                $this->iuserinfo,
+            $cache[$authority] = array($this->iuserinfo,
                                        $this->ihost,
                                        $this->port,
-                                       $return
-            ];
+                                       $return);
 
             return $return;
         }
@@ -1047,7 +1041,7 @@ class Requests_IRI
         static $cache;
         if (!$cache)
         {
-            $cache = [];
+            $cache = array();
         }
 
         $ipath = (string) $ipath;
@@ -1061,7 +1055,7 @@ class Requests_IRI
             $valid = $this->replace_invalid_with_pct_encoding($ipath, '!$&\'()*+,;=@:/');
             $removed = $this->remove_dot_segments($valid);
 
-            $cache[$ipath] = [$valid, $removed];
+            $cache[$ipath] = array($valid, $removed);
             $this->ipath =  ($this->scheme !== null) ? $removed : $valid;
         }
 
@@ -1112,7 +1106,6 @@ class Requests_IRI
     /**
      * Convert an IRI to a URI (or parts thereof)
      *
-     * @param $string
      * @return string
      */
     private function to_uri($string)

@@ -76,8 +76,8 @@ class Requests_Transport_cURL implements Requests_Transport {
 	 * @param array $options Request options, see {@see Requests::response()} for documentation
 	 * @return string Raw HTTP result
 	 */
-	public function request($url, $headers = [], $data = [], $options = []) {
-		$options['hooks']->dispatch('curl.before_request', [&$this->fp]);
+	public function request($url, $headers = array(), $data = array(), $options = array()) {
+		$options['hooks']->dispatch('curl.before_request', array(&$this->fp));
 
 		$headers = Requests::flattern($headers);
 		if (($options['type'] === Requests::HEAD || $options['type'] === Requests::GET) & !empty($data)) {
@@ -102,10 +102,10 @@ class Requests_Transport_cURL implements Requests_Transport {
 		curl_setopt($this->fp, CURLOPT_HTTPHEADER, $headers);
 
 		if (true === $options['blocking']) {
-			curl_setopt($this->fp, CURLOPT_HEADERFUNCTION, [&$this, 'stream_headers']);
+			curl_setopt($this->fp, CURLOPT_HEADERFUNCTION, array(&$this, 'stream_headers'));
 		}
 
-		$options['hooks']->dispatch('curl.before_send', [&$this->fp]);
+		$options['hooks']->dispatch('curl.before_send', array(&$this->fp));
 
 		if ($options['filename'] !== false) {
 			$stream_handle = fopen($options['filename'], 'wb');
@@ -114,12 +114,12 @@ class Requests_Transport_cURL implements Requests_Transport {
 
 		$response = curl_exec($this->fp);
 
-		$options['hooks']->dispatch('curl.after_send', [&$fake_headers]);
+		$options['hooks']->dispatch('curl.after_send', array(&$fake_headers));
 
 		if ($options['blocking'] === false) {
 			curl_close($this->fp);
 			$fake_headers = '';
-			$options['hooks']->dispatch('curl.after_request', [&$fake_headers]);
+			$options['hooks']->dispatch('curl.after_request', array(&$fake_headers));
 			return false;
 		}
 		if ($options['filename'] !== false) {
@@ -141,7 +141,7 @@ class Requests_Transport_cURL implements Requests_Transport {
 		$this->info = curl_getinfo($this->fp);
 		curl_close($this->fp);
 
-		$options['hooks']->dispatch('curl.after_request', [&$this->headers]);
+		$options['hooks']->dispatch('curl.after_request', array(&$this->headers));
 		return $this->headers;
 	}
 
